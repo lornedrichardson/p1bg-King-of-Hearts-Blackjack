@@ -15,8 +15,7 @@ function buildDeck() {
 }
 
 function shuffle() {
-  // for 1000 turns
-  // switch the values of two random cards
+  // switch the values of two random cards 1000 times
   for (let i = 0; i < 1000; i++) {
     let location1 = Math.floor(Math.random() * deck.length);
     let location2 = Math.floor(Math.random() * deck.length);
@@ -26,28 +25,15 @@ function shuffle() {
   }
 }
 
-function addPlayers(numPlayers) {
-  var players = new Array();
-  for (let i = 1; i <= num; i++) {
-    let cards = new Array();
-    let player = { name: 'Player ' + i, id: i, chips: 0, hand: cards };
-    players.push(player);
+function dealStartingHands() {
+  for (let i = 0; i < 2; i++) {
+    dealCard("player");
+    dealCard("dealer");
   }
 }
 
-function dealHands() {
-  // alternate handing cards to each player
-  // 2 cards each
-  for (let i = 0; i < 2; i++) {
-    for (let x = 0; x < players.length; x++) {
-      let card = deck.pop();
-      players[x].hand.push(card);
-      renderCard(card, x);
-      updateHandValue();
-    }
-  }
-
-  updateDeck();
+function dealCard(who) {
+  
 }
 
 function updateHandValue() {
@@ -68,7 +54,7 @@ function hit() {
   // pop a card from the deck to the current player
   // check if current player new points are over 21
   let card = deck.pop();
-  players[currentPlayer].Hand.push(card);
+  players[currentPlayer].hand.push(card);
   renderCard(card, currentPlayer);
   updateHandValue();
   updateDeck();
@@ -109,5 +95,5 @@ function updateDeck() {
 window.addEventListener('load', () => {
   buildDeck();
   shuffle();
-  addPlayers(2);
+  dealStartingHands();
 });
