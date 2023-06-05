@@ -1,8 +1,14 @@
 const suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
 const values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+let deck = [];
+let playedCards = [];
+let playerHand = [];
+let dealerHand = [];
+let playerHandValue = 0;
+let dealerHandValue = 0;
+let winnings = 0;
 
 function buildDeck() {
-  var deck = new Array();
   for (let i = 0 ; i < values.length; i++) {
     for (let j = 0; j < suits.length; j++) {
       let wt = parseInt(values[i]);
@@ -25,75 +31,119 @@ function shuffle() {
   }
 }
 
-function dealStartingHands() {
+function dealHands() {
   for (let i = 0; i < 2; i++) {
     dealCard("player");
     dealCard("dealer");
   }
-}
-
-function dealCard(who) {
-  
-}
-
-function updateHandValue() {
-  for (var i = 0 ; i < players.length; i++) {
-    getHandValue(i);
-    document.getElementById('Hand_value_' + i).innerHTML = players[i].handValue;
+  if (playerHandValue === 21 && dealerHandValue !== 21) {
+    // bet *= 1.5;
+    gameResult("player");
+  }
+  else if (playerHandValue === 21 && dealerHandValue === 21) gameResult("push");
+  else if (playerHandValue !== 21 && dealerHandValue === 21) {
+    /* if (dealerHand[0].value === "A") askForInsurance();
+    else */gameResult("dealer");
   }
 }
 
-function getHandValue(player) {
-  let total = 0;
-  for (let i = 0; i < players[player].hand.length; i++) total += players[player].hand[i].weight;
-  players[player].handValue = total;
-  return total;
+/*function askForInsurance() {
+  if (wantInsurance === true) {
+    let insurance = bet / 2;
+    if (dealerHandValue === 21) {
+      winnings += insurance * 2;
+      gameResult("dealer");
+    } else winnings -= insurance;
+  }
+}*/
+
+function dealCard(who) {
+  const card = deck.pop();
+  playedCards.push(card);
+  if (deck.length === 0) return "error";
+  if (who === "player") {
+    playerHandValue += card.weight;
+    playerHand.push(card);
+  } else {
+    dealerHandValue += card.weight;
+    dealerHand.push(card);
+  }
+}
+
+function checkAceValue(who) {
+  if (who === "player") {
+    if (playerHandValue > 21) {
+      playerHand.find((card) => (card.value === "A" && card.weight === 11));
+      card.weight -= 10;
+    }
+  } else if (who === "dealer") {
+    if (dealerHandValue > 21) {
+      dealerHand.find((card) => (card.value === "A" && card.weight === 11));
+      card.weight -= 10;
+    }
+  }
 }
 
 function hit() {
   // pop a card from the deck to the current player
   // check if current player new points are over 21
-  let card = deck.pop();
-  players[currentPlayer].hand.push(card);
-  renderCard(card, currentPlayer);
-  updateHandValue();
-  updateDeck();
-  check();
+  dealCard("player");
+  checkAceValue("player");
+  if (playerHandValue > 21) gameResult("dealer");
 }
 
 function stand() {
-  // move on to next player
-  if (currentPlayer != players.length - 1) {
-    document.getElementById('player_' + currentPlayer).classList.remove('active');
-    currentPlayer += 1;
-    document.getElementById('player_' + currentPlayer).classList.add('active');
-  } else end();
-}
-
-function end() {
-  let winner = -1;
-  let score = 0;
-
-  for (let i = 0; i < players.length - 1; i++) {
-    if (players[i].handValue > players[players.length - 1].handValue && players[i].handValue < 22) winner = i;
-    score = players[i].handValue;
+  // move on to dealer and perform dealer logic
+  while (dealerHandValue < 17) {
+    dealCard("dealer");
+    checkAceValue("dealer");
   }
-  document.getElementById('status').innerHTML = 'Winner: Player ' + players[winner].id;
-  document.getElementById("status").style.display = "inline-block";
+  if (dealerHandValue > 21) gameResult("player");
+  compareHands(playerHandValue, dealerHandValue);
 }
 
-function compareHandValues() {
-  if (players[currentPlayer].handValue > 21) document.getElementById('status').innerHTML = 'Player: ' + players[currentPlayer].id + ' Busted';
-  document.getElementById('status').style.display = "inline-block";
-  end();
+function double() {
+  bet *= 2;
+  hit();
+  stand();
 }
 
-function updateDeck() {
-  document.getElementById('deckcount').innerHTML = deck.length;
+function compareHands(playerHandValue, dealerHandValue) {
+  if (playerHandValue > dealerHandValue) gameResult("player");
+  else if (dealerHandValue > playerHandValue) gameResult("dealer");
+  else gameResult("push");
 }
 
-window.addEventListener('load', () => {
+function gameResult(result) {
+  switch (result) {
+    case "player":
+      // winnings += bet;
+      break;
+    case "dealer":
+      // winnings -= bet;
+      break;
+    case "push":
+      break;
+  }
+  newHand();
+}
+
+function newHand() {
+  deck = [];
+  playedCards = [];
+  playerHand = [];
+  dealerHand = [];
+  playerHandValue = 0;
+  dealerHandValue = 0;
+
   buildDeck();
   shuffle();
-  dealStartingHands();
-});
+  dealHands();
+  console.log(deck);
+  console.log(playerHand);
+  console.log(dealerHand);
+  console.log(playerHandValue);
+  console.log(dealerHandValue);
+}
+
+window.addEventListener('load', newHand);
