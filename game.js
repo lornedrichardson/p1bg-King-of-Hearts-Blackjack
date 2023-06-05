@@ -9,7 +9,7 @@ let dealerHandValue = 0;
 let winnings = 0;
 
 function buildDeck() {
-  for (let i = 0 ; i < values.length; i++) {
+  for (let i = 0; i < values.length; i++) {
     for (let j = 0; j < suits.length; j++) {
       let wt = parseInt(values[i]);
       if (values[i] == "J" || values[i] == "Q" || values[i] == "K") wt = 10;
@@ -136,6 +136,7 @@ function newHand() {
   playerHandValue = 0;
   dealerHandValue = 0;
 
+  // getBetAmount();
   buildDeck();
   shuffle();
   dealHands();
@@ -146,4 +147,4 @@ function newHand() {
   console.log(dealerHandValue);
 }
 
-window.addEventListener('load', newHand);
+window.addEventListener('load', () => newHand());
