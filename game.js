@@ -170,7 +170,7 @@ function hit() {
 	updateUI();
 }
 
-function adjustAceValue(who) {
+/* function adjustAceValue(who) {
 	if (who === 'player') {
 		if (playerHandValue > 21) {
 			let firstAce = playerHand.find((card) => card.value === 'A');
@@ -186,9 +186,10 @@ function adjustAceValue(who) {
 			for (let i = 0; i < dealerHand.length; i++) dealerHandValue += playerHand.card.weight;
 		}
 	}
-}
+} */
 
 function stand() {
+	dealerHandElement.children[1].style.display = 'initial';
 	while (dealerHandValue < 17) {
 		dealCard('dealer');
 		if (dealerHandValue > 21) adjustAceValue('dealer');
@@ -220,7 +221,7 @@ function newHand() {
 	document.getElementById('dealer-hand-value').textContent =
 		'Dealer Hand Value: ';
 }
-function checkScore() {
+function adjustAceValue() {
 	if (playerHandValue > 21) {
 		let aces = playerHand.filter((card) => card.value === 'A');
 		if (aces.length > 0) {
@@ -310,10 +311,8 @@ function renderGame() {
 	const playerHandValueElement = document.getElementById('player-hand-value');
 	playerHandValueElement.textContent = 'Player Hand Value: ' + playerHandValue;
 
-	// Hide the dealer's second card if the game is still in progress
-	if (playerHand.length === 2 && dealerHand.length === 2) {
-		dealerHandElement.children[1].style.display = 'none';
-	}
+	// Hide the dealer's second card if player hasn't stood
+	dealerHandElement.children[1].style.display = 'none';
 
 	// Display dealer's hand value
 	const dealerHandValueElement = document.getElementById('dealer-hand-value');
