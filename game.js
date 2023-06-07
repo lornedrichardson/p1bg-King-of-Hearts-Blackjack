@@ -267,6 +267,7 @@ function gameResult(result) {
 	document.getElementById('winnings').textContent = 'Winnings: ' + winnings;
 	document.getElementById('hit-btn').disabled = true;
 	document.getElementById('stand-btn').disabled = true;
+	document.getElementById('dbl-btn').disabled = true;
 }
 
 function clearGame() {
