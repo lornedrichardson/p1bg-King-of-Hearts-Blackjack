@@ -12,4 +12,5 @@ comparison of hand values.
 - Correct cards don't always display (happens a lot with diamonds suit)
 - Screen must be refreshed after hitting New Hand button in order to get the cards to display
 - Betting is fixed at 10 units right now
-- Does not have double button or insurance feature
+- Does not have double button
+- Does not have insurance feature
