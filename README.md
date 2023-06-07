@@ -1,8 +1,15 @@
 # p1bg-King-of-Hearts-Blackjack
 ## Software Development Bootcamp Milestone Project 1
-## _A browser-based video blackjack game with a training feature_
+## _A very rudimentary browser-based video blackjack game_
 
-There are lots of video blackjack games out there. You can find one in any casino.
-But as with most games, there's only one right way to play to maximize your wins
-(or minimize your losses). That's what our Blackjack Trainer is all about, teaching
-you Perfect Basic Strategy so that you make the optimal play every time.
+This is a blackjack game that performs the basic game functions. 
+There are buttons to hit and stand, as well as initiate a new hand. 
+It will calculate the proper hand value, evaluate to see if an Ace 
+needs to be reduced in value, and determine the winner based upon a 
+comparison of hand values.
+
+## Known Issues
+- Correct cards don't always display (happens a lot with diamonds suit)
+- Screen must be refreshed after hitting New Hand button in order to get the cards to display
+- Betting is fixed at 10 units right now
+- Does not have double button or insurance feature
