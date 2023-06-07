@@ -64,7 +64,7 @@ function getCardImage(card) {
 		if (card.value === 'J') cardImage = 'images/spade_jack.png';
 		if (card.value === 'Q') cardImage = 'images/spade_queen.png';
 		if (card.value === 'K') cardImage = 'images/spade_king.png';
-		if (card.value === 'A') cardImage = 'images/spade_ace.png';
+		if (card.value === 'A') cardImage = 'images/spade_1.png';
 	} else if (card.suit === 'Hearts') {
 		if (card.value === '2') cardImage = 'images/heart_2.png';
 		if (card.value === '3') cardImage = 'images/heart_3.png';
@@ -78,22 +78,21 @@ function getCardImage(card) {
 		if (card.value === 'J') cardImage = 'images/heart_jack.png';
 		if (card.value === 'Q') cardImage = 'images/heart_queen.png';
 		if (card.value === 'K') cardImage = 'images/heart_king.png';
-		if (card.value === 'A') cardImage = 'images/heart_ace.png';
+		if (card.value === 'A') cardImage = 'images/heart_1.png';
 	} else if (card.suit === 'Diamonds') {
-		if (card.value === '2') cardImage = 'images/diamond_1.png';
-		if (card.value === '3') cardImage = 'images/diamond_.2png';
-		if (card.value === '4') cardImage = 'images/diamond_3.png';
-		if (card.value === '5') cardImage = 'images/diamond_4.png';
-		if (card.value === '6') cardImage = 'images/diamond_5.png';
-		if (card.value === '7') cardImage = 'images/diamond_6.png';
-		if (card.value === '8') cardImage = 'images/diamond_7.png';
-		if (card.value === '9') cardImage = 'images/diamond_8.png';
-		if (card.value === '10') cardImage = 'images/diamond_9.png';
+		if (card.value === '2') cardImage = 'images/diamond_2.png';
+		if (card.value === '3') cardImage = 'images/diamond_3.png';
+		if (card.value === '4') cardImage = 'images/diamond_4.png';
+		if (card.value === '5') cardImage = 'images/diamond_5.png';
+		if (card.value === '6') cardImage = 'images/diamond_6.png';
+		if (card.value === '7') cardImage = 'images/diamond_7.png';
+		if (card.value === '8') cardImage = 'images/diamond_8.png';
+		if (card.value === '9') cardImage = 'images/diamond_9.png';
 		if (card.value === '10') cardImage = 'images/diamond_10.png';
 		if (card.value === 'J') cardImage = 'images/diamond_jack.png';
 		if (card.value === 'Q') cardImage = 'images/diamond_queen.png';
 		if (card.value === 'K') cardImage = 'images/diamond_king.png';
-		if (card.value === 'A') cardImage = 'images/ace_of_diamond.png';
+		if (card.value === 'A') cardImage = 'images/diamond_1.png';
 	} else if (card.suit === 'Clubs') {
 		if (card.value === '2') cardImage = 'images/club_2.png';
 		if (card.value === '3') cardImage = 'images/club_3.png';
@@ -107,7 +106,7 @@ function getCardImage(card) {
 		if (card.value === 'J') cardImage = 'images/club_jack.png';
 		if (card.value === 'Q') cardImage = 'images/club_queen.png';
 		if (card.value === 'K') cardImage = 'images/club_king.png';
-		if (card.value === 'A') cardImage = 'images/club.png';
+		if (card.value === 'A') cardImage = 'images/club_1.png';
 	}
 	return cardImage;
 }
