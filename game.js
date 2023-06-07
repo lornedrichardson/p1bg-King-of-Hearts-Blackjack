@@ -213,7 +213,6 @@ function newHand() {
 	dealerHandValue = 0;
 	clearGame();
 	dealHands();
-	winnings = 0;
 	bet = 10;
 	document.getElementById('winnings').textContent = 'Winnings: ' + winnings;
 	document.getElementById('player-hand-value').textContent =
