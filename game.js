@@ -162,33 +162,28 @@ function dealCard(who) {
 }
 
 function hit() {
-	if (playerHandValue <= 21) {
-		dealCard('player');
+	dealCard('player');
+	if (playerHandValue > 21) {
 		adjustAceValue('player'); // Change function name to adjustAceValue
-		if (playerHandValue > 21) {
-			gameResult('dealer');
-		}
-		updateUI();
+		if (playerHandValue > 21) gameResult('dealer');
 	}
+	updateUI();
 }
+
 function adjustAceValue(who) {
 	if (who === 'player') {
-		let aces = playerHand.filter((card) => card.value === 'A');
-		if (aces.length > 0) {
-			for (let i = 0; i < aces.length; i++) {
-				if (playerHandValue > 21) {
-					playerHandValue -= 10;
-				}
-			}
+		if (playerHandValue > 21) {
+			let firstAce = playerHand.find((card) => card.value === 'A');
+			firstAce.weight -= 10;
+			playerHandValue = 0;
+			for (let i = 0; i < playerHand.length; i++) playerHandValue += playerHand.card.weight;
 		}
 	} else if (who === 'dealer') {
-		let aces = dealerHand.filter((card) => card.value === 'A');
-		if (aces.length > 0) {
-			for (let i = 0; i < aces.length; i++) {
-				if (dealerHandValue > 21) {
-					dealerHandValue -= 10;
-				}
-			}
+		if (dealerHandValue > 21) {
+			let firstAce = dealerHand.find((card) => card.value === 'A');
+			firstAce.weight -= 10;
+			dealerHandValue = 0;
+			for (let i = 0; i < dealerHand.length; i++) dealerHandValue += playerHand.card.weight;
 		}
 	}
 }
@@ -196,7 +191,7 @@ function adjustAceValue(who) {
 function stand() {
 	while (dealerHandValue < 17) {
 		dealCard('dealer');
-		adjustAceValue('dealer'); // Change function name to adjustAceValue
+		if (dealerHandValue > 21) adjustAceValue('dealer');
 	}
 	if (dealerHandValue > 21) {
 		gameResult('player');
