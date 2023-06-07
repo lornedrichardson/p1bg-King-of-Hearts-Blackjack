@@ -64,7 +64,7 @@ function getCardImage(card) {
 		if (card.value === 'J') cardImage = 'images/spade_jack.png';
 		if (card.value === 'Q') cardImage = 'images/spade_queen.png';
 		if (card.value === 'K') cardImage = 'images/spade_king.png';
-		if (card.value === 'A') cardImage = 'images/spade_1.png';
+		if (card.value === 'A') cardImage = 'images/spade_ace.png';
 	} else if (card.suit === 'Hearts') {
 		if (card.value === '2') cardImage = 'images/heart_2.png';
 		if (card.value === '3') cardImage = 'images/heart_3.png';
@@ -78,21 +78,22 @@ function getCardImage(card) {
 		if (card.value === 'J') cardImage = 'images/heart_jack.png';
 		if (card.value === 'Q') cardImage = 'images/heart_queen.png';
 		if (card.value === 'K') cardImage = 'images/heart_king.png';
-		if (card.value === 'A') cardImage = 'images/heart_1.png';
+		if (card.value === 'A') cardImage = 'images/heart_ace.png';
 	} else if (card.suit === 'Diamonds') {
-		if (card.value === '2') cardImage = 'images/diamond_2.png';
-		if (card.value === '3') cardImage = 'images/diamond_3.png';
-		if (card.value === '4') cardImage = 'images/diamond_4.png';
-		if (card.value === '5') cardImage = 'images/diamond_5.png';
-		if (card.value === '6') cardImage = 'images/diamond_6.png';
-		if (card.value === '7') cardImage = 'images/diamond_7.png';
-		if (card.value === '8') cardImage = 'images/diamond_8.png';
-		if (card.value === '9') cardImage = 'images/diamond_9.png';
+		if (card.value === '2') cardImage = 'images/diamond_1.png';
+		if (card.value === '3') cardImage = 'images/diamond_.2png';
+		if (card.value === '4') cardImage = 'images/diamond_3.png';
+		if (card.value === '5') cardImage = 'images/diamond_4.png';
+		if (card.value === '6') cardImage = 'images/diamond_5.png';
+		if (card.value === '7') cardImage = 'images/diamond_6.png';
+		if (card.value === '8') cardImage = 'images/diamond_7.png';
+		if (card.value === '9') cardImage = 'images/diamond_8.png';
+		if (card.value === '10') cardImage = 'images/diamond_9.png';
 		if (card.value === '10') cardImage = 'images/diamond_10.png';
 		if (card.value === 'J') cardImage = 'images/diamond_jack.png';
 		if (card.value === 'Q') cardImage = 'images/diamond_queen.png';
 		if (card.value === 'K') cardImage = 'images/diamond_king.png';
-		if (card.value === 'A') cardImage = 'images/diamond_1.png';
+		if (card.value === 'A') cardImage = 'images/ace_of_diamond.png';
 	} else if (card.suit === 'Clubs') {
 		if (card.value === '2') cardImage = 'images/club_2.png';
 		if (card.value === '3') cardImage = 'images/club_3.png';
@@ -106,7 +107,7 @@ function getCardImage(card) {
 		if (card.value === 'J') cardImage = 'images/club_jack.png';
 		if (card.value === 'Q') cardImage = 'images/club_queen.png';
 		if (card.value === 'K') cardImage = 'images/club_king.png';
-		if (card.value === 'A') cardImage = 'images/club_1.png';
+		if (card.value === 'A') cardImage = 'images/club.png';
 	}
 	return cardImage;
 }
@@ -162,37 +163,41 @@ function dealCard(who) {
 }
 
 function hit() {
-	dealCard('player');
-	if (playerHandValue > 21) {
+	if (playerHandValue <= 21) {
+		dealCard('player');
 		adjustAceValue('player'); // Change function name to adjustAceValue
-		if (playerHandValue > 21) gameResult('dealer');
-	}
-	updateUI();
-}
-
-/* function adjustAceValue(who) {
-	if (who === 'player') {
 		if (playerHandValue > 21) {
-			let firstAce = playerHand.find((card) => card.value === 'A');
-			firstAce.weight -= 10;
-			playerHandValue = 0;
-			for (let i = 0; i < playerHand.length; i++) playerHandValue += playerHand.card.weight;
+			gameResult('dealer');
+		}
+		updateUI();
+	}
+}
+function adjustAceValue(who) {
+	if (who === 'player') {
+		let aces = playerHand.filter((card) => card.value === 'A');
+		if (aces.length > 0) {
+			for (let i = 0; i < aces.length; i++) {
+				if (playerHandValue > 21) {
+					playerHandValue -= 10;
+				}
+			}
 		}
 	} else if (who === 'dealer') {
-		if (dealerHandValue > 21) {
-			let firstAce = dealerHand.find((card) => card.value === 'A');
-			firstAce.weight -= 10;
-			dealerHandValue = 0;
-			for (let i = 0; i < dealerHand.length; i++) dealerHandValue += playerHand.card.weight;
+		let aces = dealerHand.filter((card) => card.value === 'A');
+		if (aces.length > 0) {
+			for (let i = 0; i < aces.length; i++) {
+				if (dealerHandValue > 21) {
+					dealerHandValue -= 10;
+				}
+			}
 		}
 	}
-} */
+}
 
 function stand() {
-	dealerHandElement.children[1].style.display = 'initial';
 	while (dealerHandValue < 17) {
 		dealCard('dealer');
-		if (dealerHandValue > 21) adjustAceValue('dealer');
+		adjustAceValue('dealer'); // Change function name to adjustAceValue
 	}
 	if (dealerHandValue > 21) {
 		gameResult('player');
@@ -214,6 +219,7 @@ function newHand() {
 	dealerHandValue = 0;
 	clearGame();
 	dealHands();
+	winnings = 0;
 	bet = 10;
 	document.getElementById('winnings').textContent = 'Winnings: ' + winnings;
 	document.getElementById('player-hand-value').textContent =
@@ -221,7 +227,7 @@ function newHand() {
 	document.getElementById('dealer-hand-value').textContent =
 		'Dealer Hand Value: ';
 }
-function adjustAceValue() {
+function checkScore() {
 	if (playerHandValue > 21) {
 		let aces = playerHand.filter((card) => card.value === 'A');
 		if (aces.length > 0) {
@@ -311,8 +317,10 @@ function renderGame() {
 	const playerHandValueElement = document.getElementById('player-hand-value');
 	playerHandValueElement.textContent = 'Player Hand Value: ' + playerHandValue;
 
-	// Hide the dealer's second card if player hasn't stood
-	dealerHandElement.children[1].style.display = 'none';
+	// Hide the dealer's second card if the game is still in progress
+	if (playerHand.length === 2 && dealerHand.length === 2) {
+		dealerHandElement.children[1].style.display = 'none';
+	}
 
 	// Display dealer's hand value
 	const dealerHandValueElement = document.getElementById('dealer-hand-value');
