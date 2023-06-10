@@ -2,11 +2,7 @@
 ## Software Development Bootcamp Milestone Project 1
 ## _A very rudimentary browser-based video blackjack game_
 
-This is a blackjack game that performs the basic game functions. 
-There are buttons to hit and stand, as well as initiate a new hand. 
-It will calculate the proper hand value, evaluate to see if an Ace 
-needs to be reduced in value, and determine the winner based upon a 
-comparison of hand values.
+This is a blackjack game that performs the basic game functions. There are buttons to hit, stand, and double, as well as initiate a new hand. It will calculate the proper hand value, evaluate to see if an Ace needs to be reduced in value, and determine the winner based upon a comparison of hand values.
 
 ## How to Play
 
@@ -42,8 +38,6 @@ If the dealer does not bust, then the higher point total between the player and 
 Winning wagers pay even money, except a winning player blackjack usually pays 3 to 2. Some casinos have been short-paying blackjacks, which is a rule strongly in the casino's favor.
 
 ## Known Issues
-- Correct cards don't always display (happens a lot with diamonds suit)
-- Screen must be refreshed after hitting New Hand button in order to get the cards to display
-- Betting is fixed at 10 units right now
-- Does not have double button
+- Betting is not enabled
 - Does not have insurance feature
+- Dealing of initial hands is not accurate to proper gameplay
