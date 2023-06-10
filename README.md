@@ -16,14 +16,27 @@ and there is at least one player (although in casinos, there are as
 many as seven). This game will have one player and the dealer.
 
 Both the player and the dealer initially get dealt two cards in 
-alternating fashion, with the player getting dealt to first. After 
-the player receives both cards, the player has a couple of options. 
-First, the player can "hit," meaning the player gets dealt another 
-card. If the player goes over 21, the player "busts" and loses the 
-game. Another option is that the player can "stand," meaning the 
-player has finished taking cards and will keep the score the player 
-presently has. The player always stands when they are done hitting, 
-unless the player has busted and already lost.
+alternating fashion, with the player getting dealt to first. The 
+dealer's second card, however, remains hidden from the players and 
+is only revealed after all of the players have finished their turns.
+
+When all of the initial hands have been dealt, any player who has a 
+blackjack automatically wins, unless the dealer has one also. The 
+dealer checks the hidden card to see if the dealer has a blackjack, 
+because if the dealer has a blackjack, any player who does not have 
+a blackjack also automatically loses. If both a player and the 
+dealer have a blackjack, those players tie or "push" with the 
+dealer.
+
+If neither the dealer nor the player has a blackjack, normal play 
+begins with the player to the left of the dealer. Each player has a 
+couple of options. First, the player can "hit," meaning the player 
+gets dealt another card. If the player goes over 21, the player 
+"busts" and loses the game. Another option is that the player can 
+"stand," meaning the player has finished taking cards and will keep 
+the score the player presently has. The player always stands when 
+they are done hitting, unless the player has busted and already 
+lost.
 
 Once the player stands, it is the dealer's turn. The dealer follows 
 a fixed set of rules. For this game, the dealer will stand if the 
