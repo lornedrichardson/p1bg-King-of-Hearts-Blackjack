@@ -5,25 +5,27 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>King of Hearts Blackjack</title>
+		<title>Blackjack Game</title>
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
-		<h1 style="text-align: center;">King of Hearts Blackjack</h1>
-		<div id="game-container">
-			<div id="player-hand" class="hand"></div>
-			<div id="dealer-hand" class="hand"></div>
+		<div class="container">
+			<h1 style="text-align: center;">King of Hearts Blackjack</h1>
+			<div id="game">
+				<div id="player-hand"></div>
+				<div id="dealer-hand"></div>
+				<div id="buttons">
+					<button id="hit-btn" class="button">Hit</button>
+					<button id="stand-btn" class="button">Stand</button>
+          <button id="dbl-btn" class="button">Double</button>
+				</div>
+				<div id="message"></div>
+				<div class="restart-button">
+					<button id="restart-btn">Restart</button>
+				</div>
+			</div>
 		</div>
-		<div id="controls">
-			<button id="hit-btn">Hit</button>
-			<button id="stand-btn">Stand</button>
-			<button id="dbl-btn">Double</button>
-			<button id="new-hand-btn">New Hand</button>
-		</div>
-		<div id="result"></div>
-		<div id="winnings">Winnings: 0</div>
-		<div id="player-hand-value"></div>
-		<div id="dealer-hand-value"></div>
+
 		<script src="game.js"></script>
 	</body>
 </html>
